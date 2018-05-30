@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "stores")
 public class Store implements Serializable {
     @Id @GeneratedValue
-    private int id;
+    private Long id;
     private String name;
     private String adress;
     private int movieamount;
@@ -33,11 +33,11 @@ public class Store implements Serializable {
         this.adress = storeAdress;
     }
 
-    public int getStoreId(){
+    public Long getStoreId(){
         return id;
     }
 
-    public void setMovieId(int id){
+    public void setMovieId(Long id){
         this.id = id;
     }
 

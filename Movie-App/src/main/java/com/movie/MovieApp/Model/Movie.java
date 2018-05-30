@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public abstract class Movie implements Serializable {
     @Id @GeneratedValue
 
-    private int id;
+    private Long id;
     private String title;
     private String author;
     private int year;
@@ -30,11 +30,11 @@ public abstract class Movie implements Serializable {
         this.year = movYear;
     }
 
-    public int getMovieId() {
+    public Long getMovieId() {
         return id;
     }
 
-    public void setMovieId(int id) {
+    public void setMovieId(Long id) {
         this.id = id;
     }
 

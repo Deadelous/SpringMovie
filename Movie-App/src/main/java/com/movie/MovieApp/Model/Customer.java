@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String name;
     private String adress;
@@ -30,9 +30,9 @@ public class Customer implements Serializable {
         this.adress = customerAdress;
     }
 
-    public int getCustomerId(){ return id; }
+    public Long getCustomerId(){ return id; }
 
-    public void setCustomerId(int id){
+    public void setCustomerId(Long id){
         this.id = id;
     }
 

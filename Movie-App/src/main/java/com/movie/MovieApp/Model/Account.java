@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private double balance;
     private int accountCreation;
 
@@ -30,11 +30,11 @@ public class Account implements Serializable {
         this.accountCreation = AccountCreation;
     }
 
-    public int getAccountId(){
+    public Long getAccountId(){
         return id;
     }
 
-    public void setAccountId(int id){
+    public void setAccountId(Long id){
         this.id = id;
     }
 

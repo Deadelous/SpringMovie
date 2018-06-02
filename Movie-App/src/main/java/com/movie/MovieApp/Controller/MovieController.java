@@ -47,7 +47,7 @@ public class MovieController {
         return "movie = actionmovie is succesfully created!";
     }
 
-    @DeleteMapping("/actionmovie/{id}")
+    @DeleteMapping("/movie/actionmovie/{id}")
     public ResponseEntity<?> deleteActionmovie (@PathVariable(value = "id") Long ActionmovieId) {
         Actionmovie actionmovie = actionMovieRepository.findById(ActionmovieId)
                 .orElseThrow(() -> new ResourceNotFoundException("Actionmovie", "id", ActionmovieId));
@@ -57,9 +57,14 @@ public class MovieController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/actionmovie/{id}")
+    @GetMapping("/movie/actionmovie/{id}")
     public Actionmovie getActionmovieId(@PathVariable(value = "id") Long ActionmovieId){
         return  actionMovieRepository.findById(ActionmovieId)
                 .orElseThrow(() -> new ResourceNotFoundException("Actionmovie", "id", ActionmovieId));
+    }
+
+    @GetMapping("actionmovies")
+    public List<Actionmovie> getAll() {
+        return (List<Actionmovie>) actionMovieRepository.findAll();
     }
 }

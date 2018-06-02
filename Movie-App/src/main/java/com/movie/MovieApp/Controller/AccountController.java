@@ -41,8 +41,8 @@ public class AccountController {
         account.setAccountBalance(accountDetails.getAccountBalance());
         account.setAccountCreation(accountDetails.getAccountCreation());
 
-        Account updatedNote = accountRepository.save(account);
-        return updatedNote;
+        Account updatedAccount = accountRepository.save(account);
+        return updatedAccount;
     }
 
     @DeleteMapping("/notes/{id}")

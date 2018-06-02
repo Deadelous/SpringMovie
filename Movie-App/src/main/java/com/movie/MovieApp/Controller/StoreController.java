@@ -43,8 +43,8 @@ public class StoreController {
         store.setMovieamount(storeDetails.getMovieamount());
         store.setMovies(storeDetails.getMovies());
 
-        Store updatedNote = storeRepository.save(store);
-        return updatedNote;
+        Store updatedStore= storeRepository.save(store);
+        return updatedStore;
     }
 
     @DeleteMapping("/stores/{id}")

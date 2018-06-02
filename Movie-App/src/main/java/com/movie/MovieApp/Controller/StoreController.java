@@ -34,11 +34,26 @@ public class StoreController {
     @PutMapping("/stores/{id}")
     public Store updateStore(@PathVariable(value = "id") Long storeId,
                              @Valid @RequestBody Store storeDetails) {
-        return null;
+
+        Store store = storeRepository.findById(storeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Store", "id", storeId));
+
+        store.setAdress(storeDetails.getAdress());
+        store.setName(storeDetails.getName());
+        store.setMovieamount(storeDetails.getMovieamount());
+        store.setMovies(storeDetails.getMovies());
+
+        Store updatedNote = storeRepository.save(store);
+        return updatedNote;
     }
 
-    @DeleteMapping("/notes/{id}")
-    public ResponseEntity<?> deleteAccount(@PathVariable(value = "id") Long accountId) {
-     return null;
+    @DeleteMapping("/stores/{id}")
+    public ResponseEntity<?> deleteAccount(@PathVariable(value = "id") Long storeId) {
+        Store store = storeRepository.findById(storeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Store", "id", storeId));
+
+        storeRepository.delete(store);
+
+        return ResponseEntity.ok().build();
     }
 }

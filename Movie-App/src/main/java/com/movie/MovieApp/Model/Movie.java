@@ -2,19 +2,23 @@ package com.movie.MovieApp.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Table(name = "Movie")
+@Table(name="movies")
 public abstract class Movie implements Serializable {
     @Id @GeneratedValue
 
     private Long id;
+    @NotNull
     private String title;
+    @NotNull
     private String author;
-    private int year;
+    @NotNull
+    private Long year;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
@@ -24,7 +28,7 @@ public abstract class Movie implements Serializable {
 
     }
 
-    public Movie(String movTitle, String movAuthor, int movYear){
+    public Movie(String movTitle, String movAuthor, Long movYear){
         this.title = movTitle;
         this.author = movAuthor;
         this.year = movYear;
@@ -54,11 +58,11 @@ public abstract class Movie implements Serializable {
         this.author = author;
     }
 
-    public int getYear() {
+    public Long getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Long year) {
         this.year = year;
     }
 

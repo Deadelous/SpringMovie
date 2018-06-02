@@ -14,8 +14,16 @@ public class Actionmovie extends Movie implements Serializable{
 
     }
 
-    public Actionmovie(String movTitle, String movAuthor, int movYear, String summary) {
+    public Actionmovie(String movTitle, String movAuthor, Long movYear, String summary) {
         super(movTitle, movAuthor, movYear);
+        this.summary = summary;
+    }
+
+    public String getSummary(){
+        return summary;
+    }
+
+    public void setSummary(String summary) {
         this.summary = summary;
     }
 }

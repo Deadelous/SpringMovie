@@ -14,7 +14,7 @@ public class Store implements Serializable {
     private Long id;
     private String name;
     private String adress;
-    private int movieamount;
+    private Long movieamount;
 
     @OneToMany(
             mappedBy = "store",
@@ -27,7 +27,7 @@ public class Store implements Serializable {
 
     }
 
-    public Store(String storeName,String storeAdress, int storeMovieAmount){
+    public Store(String storeName,String storeAdress, Long storeMovieAmount){
         this.name = storeName;
         this.movieamount = storeMovieAmount;
         this.adress = storeAdress;
@@ -37,7 +37,7 @@ public class Store implements Serializable {
         return id;
     }
 
-    public void setMovieId(Long id){
+    public void setStoreId(Long id){
         this.id = id;
     }
 
@@ -57,11 +57,11 @@ public class Store implements Serializable {
         this.adress = adress;
     }
 
-    public int getMovieamount() {
+    public Long getMovieamount() {
         return movieamount;
     }
 
-    public void setMovieamount(int movieamount) {
+    public void setMovieamount(Long movieamount) {
         this.movieamount = movieamount;
     }
 

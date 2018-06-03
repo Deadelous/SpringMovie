@@ -15,11 +15,10 @@ public class Customer implements Serializable {
     private String name;
     private String adress;
 
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy = "customer")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
 
-    public Account account;
+    private Account account;
 
     public Customer(){
 

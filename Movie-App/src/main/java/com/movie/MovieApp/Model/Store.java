@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -14,7 +17,7 @@ public class Store implements Serializable {
     private Long id;
     private String name;
     private String adress;
-    private Long movieamount;
+    private int movieamount;
 
     @OneToMany(
             mappedBy = "store",
@@ -23,14 +26,24 @@ public class Store implements Serializable {
     )
     private List<Movie> movies = new ArrayList<>();
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "store_employees",
+            joinColumns = { @JoinColumn(name = "store_id") },
+            inverseJoinColumns = { @JoinColumn(name = "employee_id") })
+    private Set<Employee> employees = new HashSet<>();
+
     public Store(){
 
     }
 
-    public Store(String storeName,String storeAdress, Long storeMovieAmount){
+    public Store(String storeName,String storeAdress, int storeMovieAmount){
         this.name = storeName;
-        this.movieamount = storeMovieAmount;
         this.adress = storeAdress;
+        this.movieamount = storeMovieAmount;
     }
 
     public Long getStoreId(){
@@ -57,11 +70,11 @@ public class Store implements Serializable {
         this.adress = adress;
     }
 
-    public Long getMovieamount() {
+    public int getMovieamount() {
         return movieamount;
     }
 
-    public void setMovieamount(Long movieamount) {
+    public void setMovieamount(int movieamount) {
         this.movieamount = movieamount;
     }
 
@@ -71,5 +84,13 @@ public class Store implements Serializable {
 
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 }

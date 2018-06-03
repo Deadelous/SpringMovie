@@ -6,7 +6,7 @@ import java.io.Serializable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "customer_accounts")
+@Table(name = "accounts")
 public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,10 +14,9 @@ public class Account implements Serializable {
     private double balance;
     private int accountCreation;
 
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
-
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "account")
     private Customer customer;
 
 
@@ -25,7 +24,7 @@ public class Account implements Serializable {
 
     }
 
-    public Account(double Accountbalance, int AccountCreation ){
+    public Account(double Accountbalance, int AccountCreation){
         this.balance = Accountbalance;
         this.accountCreation = AccountCreation;
     }
@@ -61,5 +60,7 @@ public class Account implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    
 }
 

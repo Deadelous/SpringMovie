@@ -25,7 +25,7 @@ public class CustomerController {
         return customerRepository.save(customer);
     }
 
-    @GetMapping("/Customers{id}")
+    @GetMapping("/Customers/{id}")
     public Customer getCustomerId(@PathVariable(value = "id") Long customerId){
         return customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", customerId));
@@ -50,8 +50,11 @@ public class CustomerController {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", customerId));
 
+
         customerRepository.delete(customer);
 
+        System.out.println("delete customer");
         return ResponseEntity.ok().build();
+
     }
 }

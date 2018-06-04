@@ -17,7 +17,6 @@ public class Customer implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
-
     private Account account;
 
     public Customer(){

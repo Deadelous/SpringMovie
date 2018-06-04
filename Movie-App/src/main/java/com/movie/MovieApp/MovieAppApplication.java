@@ -1,7 +1,11 @@
 package com.movie.MovieApp;
 
+import com.movie.MovieApp.Model.Account;
+import com.movie.MovieApp.Model.Customer;
 import com.movie.MovieApp.Model.Employee;
 import com.movie.MovieApp.Model.Store;
+import com.movie.MovieApp.Repository.AccountRepository;
+import com.movie.MovieApp.Repository.CustomerRepository;
 import com.movie.MovieApp.Repository.EmployeeRepository;
 import com.movie.MovieApp.Repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,13 @@ public class MovieAppApplication  implements CommandLineRunner {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
+	@Autowired
+	private AccountRepository accountRepository;
+
+	@Autowired
+	private CustomerRepository customerRepository;
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(MovieAppApplication.class, args);
 
@@ -26,8 +37,14 @@ public class MovieAppApplication  implements CommandLineRunner {
 	@Override
 	public void run(String[] args) throws Exception {
 
-		storeRepository.deleteAllInBatch();
-		employeeRepository.deleteAllInBatch();
+		addEmployeeinStore();
+		addOneAccounttoCustomer();
+	}
+
+
+
+	public void addEmployeeinStore(){
+
 
 		Store store = new Store("moviestore"," movielaan15 " ,15);
 
@@ -42,6 +59,20 @@ public class MovieAppApplication  implements CommandLineRunner {
 		employee1.getStores().add(store);
 
 		storeRepository.save(store);
+	}
+
+
+	public void addOneAccounttoCustomer(){
+
+		Customer customer = new Customer("Leo Davidsen", "Tivolistraat 22");
+
+		Account account = new Account(20.55, 2018);
+
+		customer.setAccount(account);
+
+		account.setCustomer(customer);
+
+		accountRepository.save(account);
 	}
 
 }

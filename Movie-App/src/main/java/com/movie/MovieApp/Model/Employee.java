@@ -1,9 +1,12 @@
 package com.movie.MovieApp.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -16,13 +19,15 @@ public class Employee implements Serializable {
     private Long id;
     private String name;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
+
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
             mappedBy = "employees")
-    private Set<Store> stores = new HashSet<>();
+    private List<Store> stores = new ArrayList<>();
 
 
     public Employee(){
@@ -49,11 +54,11 @@ public class Employee implements Serializable {
         this.name = name;
     }
 
-    public Set<Store> getStores() {
+    public List<Store> getStores() {
         return stores;
     }
 
-    public void setStores(Set<Store> stores) {
+    public void setStores(List<Store> stores) {
         this.stores = stores;
     }
 }

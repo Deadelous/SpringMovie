@@ -1,5 +1,6 @@
 package com.movie.MovieApp.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class Store implements Serializable {
     )
     private List<Movie> movies = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
@@ -34,7 +36,7 @@ public class Store implements Serializable {
     @JoinTable(name = "store_employees",
             joinColumns = { @JoinColumn(name = "store_id") },
             inverseJoinColumns = { @JoinColumn(name = "employee_id") })
-    private Set<Employee> employees = new HashSet<>();
+    private List<Employee> employees = new ArrayList<>();
 
     public Store(){
 
@@ -86,11 +88,11 @@ public class Store implements Serializable {
         this.movies = movies;
     }
 
-    public Set<Employee> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<Employee> employees) {
+    public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
 }

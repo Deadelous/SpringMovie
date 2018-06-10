@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>Movie-App</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Movie Application for hibernate, JPA and JWT</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

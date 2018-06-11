@@ -15,6 +15,8 @@ public class Account implements Serializable {
     private Long id;
     private double balance;
     private int accountCreation;
+    private String username;
+    private String password;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
@@ -25,6 +27,11 @@ public class Account implements Serializable {
 
     public Account(){
 
+    }
+
+    public Account(String username, String password){
+        this.username = username;
+        this.password = password;
     }
 
     public Account(double Accountbalance, int AccountCreation){
@@ -64,6 +71,20 @@ public class Account implements Serializable {
         this.customer = customer;
     }
 
-    
+    public String getUsername(){
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
 

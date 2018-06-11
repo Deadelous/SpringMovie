@@ -30,10 +30,7 @@ public class MovieAppApplication  implements CommandLineRunner {
 	@Autowired
 	private CustomerRepository customerRepository;
 
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+
 
 
 	public static void main(String[] args) {
@@ -46,6 +43,11 @@ public class MovieAppApplication  implements CommandLineRunner {
 
 		addEmployeeinStore();
 		addOneAccounttoCustomer();
+	}
+
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 
@@ -73,7 +75,7 @@ public class MovieAppApplication  implements CommandLineRunner {
 
 		Customer customer = new Customer("Leo Davidsen", "Tivolistraat 22");
 
-		Account account = new Account(20.55, 2018);
+		Account account = new Account("test", "test");
 
 		customer.setAccount(account);
 

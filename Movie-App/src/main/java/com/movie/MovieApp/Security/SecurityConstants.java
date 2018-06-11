@@ -1,5 +1,7 @@
 package com.movie.MovieApp.Security;
 
+//https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
+
 public class SecurityConstants {
     public static final String SECRET = "SecretKeyToGenJWTs";
     public static final long EXPIRATION_TIME = 864_000_000; // 10 days

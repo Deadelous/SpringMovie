@@ -1,10 +1,9 @@
 package com.movie.MovieApp.Repository;
 
-import com.movie.MovieApp.Model.Account;
+import com.movie.MovieApp.Model.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, Long>{
-    Account findByUsername(String username);
+public interface AuthorRepository extends JpaRepository<Author, Long> {
 }

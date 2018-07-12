@@ -1,5 +1,7 @@
 package com.movie.MovieApp.Security;
 
+//https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
+
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +20,7 @@ import static com.movie.MovieApp.Security.SecurityConstants.SECRET;
 import static com.movie.MovieApp.Security.SecurityConstants.TOKEN_PREFIX;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
+
     public JWTAuthorizationFilter(AuthenticationManager authManager) {
         super(authManager);
     }
@@ -42,15 +45,15 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
-            // parse the token.
-            String customer = Jwts.parser()
+
+            String account = Jwts.parser()
                     .setSigningKey(SECRET.getBytes())
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
 
-            if (customer!= null) {
-                return new UsernamePasswordAuthenticationToken(customer, null, new ArrayList<>());
+            if (account!= null) {
+                return new UsernamePasswordAuthenticationToken(account, null, new ArrayList<>());
             }
             return null;
         }

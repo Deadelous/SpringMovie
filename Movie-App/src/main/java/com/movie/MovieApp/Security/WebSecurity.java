@@ -1,5 +1,8 @@
 package com.movie.MovieApp.Security;
 
+//https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
+
+import com.movie.MovieApp.Repository.AccountRepository;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,9 +20,12 @@ import static com.movie.MovieApp.Security.SecurityConstants.SIGN_UP_URL;
 
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public WebSecurity(BCryptPasswordEncoder bCryptPasswordEncoder) {
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private AccountRepository accountRepository;
+
+    public WebSecurity(AccountRepository accountRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.accountRepository = accountRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -37,7 +43,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-
     }
 
     @Bean

@@ -5,6 +5,7 @@ import com.movie.MovieApp.Model.Account;
 import com.movie.MovieApp.Repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -14,6 +15,14 @@ import java.util.List;
 public class AccountController {
     @Autowired
     AccountRepository accountRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public AccountController(AccountRepository accountRepository,
+                          BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.accountRepository = accountRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
 
     @GetMapping("/accounts")
     public List<Account> getAllAccounts(){
@@ -53,5 +62,11 @@ public class AccountController {
         accountRepository.delete(account);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/sign-up")
+    public void signUp(@RequestBody Account account) {
+        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
+        accountRepository.save(account);
     }
 }
